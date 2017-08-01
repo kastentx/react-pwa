@@ -16,9 +16,8 @@ export default function Prompt(props) {
         </div>
         <div className="form-group">
           <button
-            style={{width: '10%', backgroundColor: 'blue', marginLeft: '0'}}
-            className="btn"
-            type="submit">
+            className="btn btn-primary"
+            type="button">
             Submit
           </button>
         </div>

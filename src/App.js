@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PromptContainer from './containers/PromptContainer';
+import ListContainer from './containers/ListContainer';
 import './App.css';
 
 class App extends Component {
@@ -12,7 +12,7 @@ class App extends Component {
         <p className="App-intro">
           This is an example written in <code>React</code> showing the offline first capabilitiers of a PWA.
         </p>
-        <PromptContainer/>
+        <ListContainer />
       </div>
     );
   }
