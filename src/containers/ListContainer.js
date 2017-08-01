@@ -14,7 +14,7 @@ class ListContainer extends Component {
       items: []
     }
   }
-  
+
   componentDidMount = () => {
     console.log('did mount');
     this.getPouchDocs();
@@ -46,7 +46,16 @@ class ListContainer extends Component {
   }
 
   delPouchDoc = (item) => {
-    console.log(item.target.dataset.item + " is gonna get deleted!");
+    let myItem = item.target.dataset.item;
+    localDB.get(item.target.dataset.id).then(doc => {
+      doc._deleted = true;
+      return localDB.put(doc);
+    }).then(result => {
+      console.log(myItem + " gets deleted");
+      this.getPouchDocs();
+    }).catch(err => {
+      console.log(err);
+    });
   }
 
   handleChange = (e) => {
@@ -64,7 +73,7 @@ class ListContainer extends Component {
   }
 
   renderListItems = () => {
-    return this.state.items.slice().map(item => <Item key={item._id} text={item.text} delDoc={this.delPouchDoc}/>);
+    return this.state.items.slice().map(item => <Item key={item._id} id={item._id} text={item.text} delDoc={this.delPouchDoc}/>);
   }
 
   render() {
