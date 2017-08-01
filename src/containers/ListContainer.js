@@ -34,7 +34,8 @@ class ListContainer extends Component {
   addPouchDoc = (item) => {
   if (item.length) {
     return localDB.post({
-      text: item
+      text: item,
+      _id: new Date()
     }).then(response => {
       console.log(item + " added to PouchDB.");
       this.getPouchDocs();
