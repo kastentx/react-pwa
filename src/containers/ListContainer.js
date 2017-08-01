@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ShoppingList from '../components/ShoppingList';
 import Prompt from '../components/Prompt';
+import Item from '../components/Item';
 import PouchDB from 'pouchdb';
 
 const localDB = new PouchDB('http://localhost:5984/shoppingList');
@@ -58,7 +59,7 @@ class ListContainer extends Component {
   }
 
   renderListItems = () => {
-    return this.state.items.slice().map(item => <li key={item._id}>{item.text}</li>);
+    return this.state.items.slice().map(item => <Item key={item._id} text={item.text}/>);
   }
 
   render() {
