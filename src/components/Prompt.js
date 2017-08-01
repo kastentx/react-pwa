@@ -17,7 +17,7 @@ export default function Prompt(props) {
         <div className="form-group">
           <button
             className="btn btn-primary"
-            type="button">
+            type="submit">
             Submit
           </button>
         </div>
@@ -27,7 +27,7 @@ export default function Prompt(props) {
 }
 
 Prompt.propTypes = {
-  onSubmit: PropTypes.func,
-  onChange: PropTypes.func,
-  value: PropTypes.string
+  onSubmit: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired
 }

@@ -19,10 +19,16 @@ class ListContainer extends Component {
 
   handleSubmit = (e)  => {
     e.preventDefault();
+    this.setState({
+      items:  [...this.state.items, this.state.input]
+    })
+  }
+
+  renderListItems = () => {
+    return this.state.items.slice().map((item, i) => <li key={i}>{item}</li>)
   }
 
   render() {
-    let listItems = this.state.items.map(item => <li>{item}</li>)
     return (
       <div>
         <Prompt
@@ -30,9 +36,9 @@ class ListContainer extends Component {
           onChange={this.handleChange}
           onSubmit={this.handleSubmit}
         />
-        <ShoppingList
-          items={listItems}
-        />
+        <ShoppingList>
+          {this.renderListItems()}
+        </ShoppingList>
       </div>
     );
   }
