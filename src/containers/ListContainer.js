@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import ShoppingList from '../components/ShoppingList';
 import Prompt from '../components/Prompt';
-import { addItem, getAllDocs } from '../utils'
+import PouchDB from 'pouchdb';
+
+const localDB = new PouchDB('http://localhost:5984/shoppingList');
 
 class ListContainer extends Component {
   constructor(props) {
@@ -11,16 +13,35 @@ class ListContainer extends Component {
       items: []
     }
   }
-
+  
   componentDidMount = () => {
     console.log('did mount');
-    getAllDocs().then(result => {
-      const currentItems = result.rows.map(item => {return {_id: item.doc._id, text: item.doc.text}});
+    this.getPouchDocs();
+  }
+
+  getPouchDocs = () => {
+    return localDB.allDocs({
+      include_docs: true
+    }).then(response => {
+      console.log('getting updated items from PouchDB.')
       this.setState({
-        items: currentItems
-      });
+        items: response.rows.map(item => {return {_id: item.doc._id, text: item.doc.text}})
+      })
     });
   }
+
+  addPouchDoc = (item) => {
+  if (item.length) {
+    return localDB.post({
+      text: item
+    }).then(response => {
+      console.log(item + " added to PouchDB.");
+      this.getPouchDocs();
+    }).catch(err => {
+      console.log(err);
+    });
+  }
+}
 
   handleChange = (e) => {
     this.setState({
@@ -30,23 +51,14 @@ class ListContainer extends Component {
 
   handleSubmit = (e)  => {
     e.preventDefault();
-    addItem(this.state.input).then(
-      this.setState({
-        input: ''
-      }, this.getItemsFromPouch()));
+    this.addPouchDoc(this.state.input);
+    this.setState({
+      input: ''
+    });
   }
 
   renderListItems = () => {
     return this.state.items.slice().map(item => <li key={item._id}>{item.text}</li>);
-  }
-
-  getItemsFromPouch = () => {
-    getAllDocs().then(result => {
-      const currentItems = result.rows.map(item => {return {_id: item.doc._id, text: item.doc.text}});
-      this.setState({
-        items: currentItems
-      });
-    });
   }
 
   render() {
