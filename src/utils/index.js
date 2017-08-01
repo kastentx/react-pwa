@@ -1,9 +1,24 @@
 import PouchDB from 'pouchdb';
 
-const myPouchDB = new PouchDB('shopping');
+const localDB = new PouchDB('http://localhost:5984/shoppingList');
 
 function addItem(item) {
-  console.log(item)
+  if (item.length) {
+    return localDB.post({
+      text: item
+    }).then(response => {
+      console.log(response);
+    }).catch(err => {
+      console.log(err);
+    });
+  }
 }
 
-export { addItem }
+function getAllDocs() {
+  console.log('getalldocs called');
+  return localDB.allDocs({
+    include_docs: true
+  })
+}
+
+export { addItem, getAllDocs }

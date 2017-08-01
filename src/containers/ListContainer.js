@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
 import ShoppingList from '../components/ShoppingList';
 import Prompt from '../components/Prompt';
-import { addItem } from '../utils'
+import { addItem, getAllDocs } from '../utils'
 
 class ListContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       input: '',
-      items: ['cat hair', 'frog legs']
+      items: []
     }
+  }
+
+  componentDidMount = () => {
+    console.log('did mount');
+    getAllDocs().then(result => {
+      const currentItems = result.rows.map(item => {return {_id: item.doc._id, text: item.doc.text}});
+      this.setState({
+        items: currentItems
+      });
+    });
   }
 
   handleChange = (e) => {
@@ -20,25 +30,28 @@ class ListContainer extends Component {
 
   handleSubmit = (e)  => {
     e.preventDefault();
-    let submission = this.state.input
-    this.setState({
-      input: '',
-      items:  [...this.state.items, submission]
-    })
+    addItem(this.state.input).then(
+      this.setState({
+        input: ''
+      }, this.getItemsFromPouch()));
   }
 
   renderListItems = () => {
-    return this.state.items.slice().map((item, i) => <li key={i}>{item}</li>)
+    return this.state.items.slice().map(item => <li key={item._id}>{item.text}</li>);
   }
 
-  componentDidUpdate = (prevProps, prevState) => {
-    if (this.state.items.length !== prevState.items.length)
-      addItem(prevState.input)
+  getItemsFromPouch = () => {
+    getAllDocs().then(result => {
+      const currentItems = result.rows.map(item => {return {_id: item.doc._id, text: item.doc.text}});
+      this.setState({
+        items: currentItems
+      });
+    });
   }
 
   render() {
     return (
-      <div>
+      <div className="col-sm-offset-4 col-sm-4 list-wrapper">
         <Prompt
           value={this.state.input}
           onChange={this.handleChange}
