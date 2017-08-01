@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ShoppingList from '../components/ShoppingList';
 import Prompt from '../components/Prompt';
+import { addItem } from '../utils'
 
 class ListContainer extends Component {
   constructor(props) {
@@ -19,13 +20,20 @@ class ListContainer extends Component {
 
   handleSubmit = (e)  => {
     e.preventDefault();
+    let submission = this.state.input
     this.setState({
-      items:  [...this.state.items, this.state.input]
+      input: '',
+      items:  [...this.state.items, submission]
     })
   }
 
   renderListItems = () => {
     return this.state.items.slice().map((item, i) => <li key={i}>{item}</li>)
+  }
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (this.state.items.length !== prevState.items.length)
+      addItem(prevState.input)
   }
 
   render() {
