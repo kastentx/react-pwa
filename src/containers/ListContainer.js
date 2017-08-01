@@ -27,7 +27,7 @@ class ListContainer extends Component {
       console.log('getting updated items from PouchDB.')
       this.setState({
         items: response.rows.map(item => {return {_id: item.doc._id, text: item.doc.text}})
-      })
+      });
     });
   }
 
