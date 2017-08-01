@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 
 export default function Item(props) {
   return (
-    <li>{props.text}</li>
+    <div>
+      <li>{props.text} <span className="delete-btn" onClick={props.delDoc} data-item={props.text}>X</span></li>
+    </div>
   );
 }
 

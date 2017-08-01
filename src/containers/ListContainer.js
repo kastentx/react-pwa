@@ -32,18 +32,22 @@ class ListContainer extends Component {
   }
 
   addPouchDoc = (item) => {
-  if (item.length) {
-    return localDB.post({
-      text: item,
-      _id: new Date()
-    }).then(response => {
-      console.log(item + " added to PouchDB.");
-      this.getPouchDocs();
-    }).catch(err => {
-      console.log(err);
-    });
+    if (item.length) {
+      return localDB.post({
+        text: item,
+        _id: new Date()
+      }).then(response => {
+        console.log(item + " added to PouchDB.");
+        this.getPouchDocs();
+      }).catch(err => {
+        console.log(err);
+      });
+    }
   }
-}
+
+  delPouchDoc = (item) => {
+    console.log(item.target.dataset.item + " is gonna get deleted!");
+  }
 
   handleChange = (e) => {
     this.setState({
@@ -60,7 +64,7 @@ class ListContainer extends Component {
   }
 
   renderListItems = () => {
-    return this.state.items.slice().map(item => <Item key={item._id} text={item.text}/>);
+    return this.state.items.slice().map(item => <Item key={item._id} text={item.text} delDoc={this.delPouchDoc}/>);
   }
 
   render() {
