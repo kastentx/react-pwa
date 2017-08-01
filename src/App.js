@@ -10,7 +10,7 @@ class App extends Component {
           <h2>My Robust Shopping List</h2>
         </div>
         <p className="App-intro">
-          This is an example written in <code>React</code> showing the offline first capabilities of a PWA when using PouchDB.
+          This is an example written with <code>React</code> and <code>PouchDB</code> showing the offline first capabilities of a PWA.
         </p>
         <ListContainer />
       </div>
