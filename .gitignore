@@ -4,6 +4,8 @@
 /_replicator
 /_users
 /pouch*
+/shoppingList
+log.txt
 
 # dependencies
 /node_modules
