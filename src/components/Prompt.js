@@ -10,7 +10,8 @@ export default function Prompt(props) {
           value={props.value}
           className="form-control"
           placeholder="add an item..."
-          type="text" />
+          type="text"
+        />
       </div>
     </form>
   );
