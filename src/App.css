@@ -3,15 +3,17 @@
 }
 
 .App-header {
-  background-color: darkblue;
-  padding: 15px 0 15px 15px;
+  background-color: #2d3e50;
+  padding: 15px;
   margin-bottom: 2%;
   color: white;
   text-align: left;
+  text-transform: uppercase;
 }
 
 .App-header h2 {
   margin: 0;
+  font-size: 150%;
 }
 
 .App-intro {
@@ -20,13 +22,11 @@
 
 .list-wrapper {
   margin-top: 2%;
-  background-color: lightsteelblue;
   padding: 1%;
-  border-radius: 5px;
 }
 
 ul {
-  list-style: square inside;
+  list-style: inside;
   padding: 0;
 }
 
@@ -36,12 +36,25 @@ li {
   padding-right: 2%;
   margin: .25% auto 0 auto;
   font-size: large;
-  border: .5px lightgray solid;
-  border-radius: 2px;
+
 }
 
 .delete-btn {
-  color: red;
+  color: crimson;
   float: right;
   cursor: pointer;
+  font-size: 80%;
+}
+
+.footer {
+    background-color: #111;
+    color: #7f8c8d;
+    padding: 15px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+input {
+  margin: 0 0 5% 0;
 }
