@@ -16,24 +16,23 @@ class ListContainer extends Component {
   }
 
   componentDidMount = () => {
-    console.log('did mount');
     this.getPouchDocs();
   }
 
   getPouchDocs = () => {
-    return localDB.allDocs({
+    localDB.allDocs({
       include_docs: true
     }).then(response => {
       console.log('getting updated items from PouchDB.')
       this.setState({
-        items: response.rows.map(item => {return {_id: item.doc._id, text: item.doc.text}})
+        items: response.rows.map(item => ({_id: item.doc._id, text: item.doc.text}))
       });
     });
   }
 
   addPouchDoc = (item) => {
     if (item.length) {
-      return localDB.post({
+      localDB.post({
         text: item,
         _id: new Date()
       }).then(response => {
