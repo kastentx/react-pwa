@@ -5,7 +5,7 @@ import Item from '../components/Item';
 import PouchDB from 'pouchdb';
 import Credentials from '../secret';
 
-const localDB = new PouchDB('http://localhost:5984/shoppingList');
+const localDB = new PouchDB('shopping_list');
 const remoteDB = new PouchDB(Credentials.cloudant_url);
 
 class ListContainer extends Component {
