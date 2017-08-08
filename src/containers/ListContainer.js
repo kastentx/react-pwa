@@ -10,6 +10,7 @@ const remoteDB = new PouchDB(Credentials.cloudant_url);
 
 const containerStyle = {
   marginTop: '2%',
+  marginBottom: '5%',
   padding: '1%'
 };
 
