@@ -8,6 +8,11 @@ import Credentials from '../secret';
 const localDB = new PouchDB('shopping_list');
 const remoteDB = new PouchDB(Credentials.cloudant_url);
 
+const containerStyle = {
+  marginTop: '2%',
+  padding: '1%'
+};
+
 class ListContainer extends Component {
   constructor(props) {
     super(props);
@@ -84,7 +89,7 @@ class ListContainer extends Component {
 
   render() {
     return (
-      <div className="col-sm-offset-4 col-sm-4 list-wrapper">
+      <div className="col-sm-offset-4 col-sm-4">
         <Prompt
           value={this.state.input}
           onChange={this.handleChange}
