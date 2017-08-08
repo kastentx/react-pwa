@@ -1,6 +1,9 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
-#db stuff
+# credentials
+secret.js
+
+# db stuff
 /_replicator
 /_users
 /pouch*

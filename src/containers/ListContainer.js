@@ -3,8 +3,10 @@ import ShoppingList from '../components/ShoppingList';
 import Prompt from '../components/Prompt';
 import Item from '../components/Item';
 import PouchDB from 'pouchdb';
+import Credentials from '../secret';
 
-const localDB = new PouchDB('http://localhost:5984/shoppingList');
+const localDB = new PouchDB('shopping_list');
+const remoteDB = new PouchDB(Credentials.cloudant_url);
 
 class ListContainer extends Component {
   constructor(props) {
@@ -17,6 +19,11 @@ class ListContainer extends Component {
 
   componentDidMount = () => {
     this.getPouchDocs();
+    localDB.sync(remoteDB, {live: true, retry: true})
+      .on('change',  change => console.log('something changed!'))
+      .on('paused', info => console.log('replication paused.'))
+      .on('active', info => console.log('replication resumed.'))
+      .on('error', err => console.log('uh oh! an error occured.'));
   }
 
   getPouchDocs = () => {
