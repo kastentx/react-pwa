@@ -25,7 +25,7 @@ class ListContainer extends Component {
   componentDidMount = () => {
     this.getPouchDocs();
     localDB.sync(remoteDB, {live: true, retry: true})
-      .on('change',  change => console.log('something changed!'))
+      .on('change', change => console.log('something changed!'))
       .on('paused', info => console.log('replication paused.'))
       .on('active', info => console.log('replication resumed.'))
       .on('error', err => console.log('uh oh! an error occured.'));
@@ -89,7 +89,7 @@ class ListContainer extends Component {
 
   render() {
     return (
-      <div className="col-sm-offset-4 col-sm-4">
+      <div className="col-sm-offset-4 col-sm-4" style={containerStyle}>
         <Prompt
           value={this.state.input}
           onChange={this.handleChange}
