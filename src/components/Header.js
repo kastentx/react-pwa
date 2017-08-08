@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Footer(props) {
+export default function Header(props) {
   return (
     <div className="App-header">
       <h2>Shopping List</h2>
