@@ -8,7 +8,7 @@ const inputStyle = {
 export default function Prompt(props) {
   return (
     <form onSubmit={props.onSubmit}>
-      <div className="form-group row">
+      <div className="form-group row" style={inputStyle}>
         <input
           onChange={props.onChange}
           value={props.value}
