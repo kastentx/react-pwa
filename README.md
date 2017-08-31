@@ -6,7 +6,7 @@ Nick Kasten
 IBM Dev Intern
 Summer 2017
 
-## Installation
+## Quick Start
 
 1. `git clone` this repo and `cd` into the project's root directory.
 2. Execute `mv src/sample-secret.js src/secret.js` from the root directory.
