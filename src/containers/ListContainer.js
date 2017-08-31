@@ -6,7 +6,7 @@ import PouchDB from 'pouchdb';
 import Credentials from '../secret';
 
 const localDB = new PouchDB('shopping_list');
-const remoteDB = new PouchDB(Credentials.cloudant_url + '/shopping_list');
+const remoteDB = new PouchDB(Credentials.cloudant_url);
 
 const containerStyle = {
   marginTop: '2%',
