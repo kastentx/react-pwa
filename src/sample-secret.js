@@ -1,5 +1,5 @@
 const Credentials = {
-  "cloudant_url": "my_cloudant_url_from_bluemix"
+  "cloudant_url": "my_cloudant_url/my_database_name"
 }
 
 export default Credentials;
